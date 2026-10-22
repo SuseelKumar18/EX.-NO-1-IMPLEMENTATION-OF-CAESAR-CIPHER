@@ -1,5 +1,9 @@
 # EX. NO: 1(A) : IMPLEMENTATION OF CAESAR CIPHER
 
+## NAME: S SUSEEL KUMAR
+## REGISTER NUMBER: 212225240163
+## DATE: 22-10-2026
+
 ## AIM:
 To implement the simple substitution technique named Caesar cipher using C language.
 
