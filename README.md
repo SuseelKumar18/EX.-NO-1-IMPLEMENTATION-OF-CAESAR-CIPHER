@@ -18,44 +18,68 @@ STEP-5: Display the cipher text obtained above.
 ## PROGRAM:
 
 ```
-#include <stdio.h> 
-#include <string.h> 
-#include <ctype.h> 
-void main() 
-{ 
-    char plain[10],cipher[10]; 
-    int key,i,length; 
-    int result; 
-    printf("\n Enter the plain text:"); 
-    scanf("%s", plain); 
-    printf("\n Enter the key value:"); 
-    scanf("%d", &key); 
-    printf("\n \n \t PLAIN TEXt: %s", plain); 
-    printf("\n \n \t ENCRYPTED TEXT:"); 
-    for(i=0, length = strlen(plain); i<length; i++) 
-    { 
-        cipher[i]=plain[i] + key; 
-        if (isupper(plain[i]) && (cipher[i] > 'Z')) 
-        cipher[i] = cipher[i] - 26; 
-        if (islower(plain[i]) && (cipher[i] > 'z')) 
-        cipher[i] = cipher[i] - 26; 
-        printf("%c", cipher[i]); 
-    } 
-    printf("\n \n \t AFTER DECRYPTION : "); 
-    for(i=0;i<length;i++) 
-    { 
-        plain[i]=cipher[i]-key; 
-        if(isupper(cipher[i])&&(plain[i]<'A')) 
-        plain[i]=plain[i]+26; 
-        if(islower(cipher[i])&&(plain[i]<'a')) 
-        plain[i]=plain[i]+26; 
-        printf("%c",plain[i]); 
-    } 
+#include <stdio.h>
+#include <string.h>
+
+void decryption(char CT[],int key,char PT[]);
+void encryption(char PT[],int key)
+{
+    char CT[100];
+    for(int i=0; PT[i] != '\0'; i++)
+        {
+            if(PT[i] >= 'A' && PT[i] <= 'Z')
+            {
+                CT[i] = (PT[i] - 'A' + key) % 26 + 'A';
+            }
+
+            else if(PT[i] >= 'a' && PT[i] <= 'z')
+            {
+                CT[i] = (PT[i] - 'a' + key) % 26 + 'a';
+            }
+        }
+    printf("The encrypted message : ");
+    printf("%s",CT);
+    decryption(CT,key,PT);
+}
+
+void decryption(char CT[],int key,char PT[])
+{
+    key = key % 26;
+    for(int i=0; CT[i]!= '\0' ; i++)
+        {
+            if(CT[i] >= 'A' && CT[i] <= 'Z')
+            {
+                PT[i] = (CT[i] - 'A' - key + 26) % 26 + 'A';
+            }
+
+            else if(CT[i] >= 'a' && CT[i] <= 'z')
+            {
+                PT[i] = (CT[i] - 'a' - key + 26) % 26 + 'a';
+            }
+        }
+    printf("\nThe decrypted message : ");
+    printf("%s",PT);
+}
+
+int main() 
+{
+    char PT[100];
+    printf("Enter The PlainText :");
+    fgets(PT,sizeof(PT),stdin);
+
+    int key;
+    printf("Enter the key value :");
+    scanf("%d",&key);
+
+    encryption(PT,key);
+    
+    return 0;
 }
 ```
 
 ## OUTPUT:
-<img width="1651" height="985" alt="image" src="https://github.com/user-attachments/assets/8ba85747-093e-422b-80de-656e977ef05e" />
+<img width="1463" height="1078" alt="image" src="https://github.com/user-attachments/assets/43849f69-61e7-4057-be21-39493296434f" />
+
 
 ## RESULT :
  Thus the implementation of ceasar cipher had been executed successfully.
